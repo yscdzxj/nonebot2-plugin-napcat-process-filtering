@@ -20,8 +20,6 @@
 > [!IMPORTANT]
 > **收藏项目**，你将从 GitHub 上无延迟地接收所有发布通知～⭐️
 
-<img width="100%" src="https://starify.komoridevs.icu/api/starify?owner=yscdzxj&repo=nonebot2_qq_napcat_process_filtering" alt="starify" />
-
 > 基于 NapCat 的 `<获取被过滤好友请求 API>` 实现的自动同意被过滤好友请求的 NoneBot2 插件。
 
 ---
