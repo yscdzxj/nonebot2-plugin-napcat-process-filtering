@@ -53,8 +53,8 @@
 2. 在使用前请先安装 nonebot-plugin-apscheduler 插件至项目环境中，可参考获取商店插件来了解并选择安装插件的方式。如：
 在项目目录下执行以下命令：
 
-   ```
-  nb plugin install nonebot-plugin-apscheduler：
+   ```bash
+  nb plugin install nonebot-plugin-apscheduler
    ```
 3. 克隆本仓库或将插件代码放入 NoneBot2 项目的插件目录。
 
