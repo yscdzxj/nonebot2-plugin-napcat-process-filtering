@@ -11,7 +11,7 @@ __plugin_meta__ = PluginMetadata(
     description="自动处理 QQ 中被过滤的好友请求",
     usage="启动插件后，自动轮询并处理被过滤的好友请求。",
     type="application",
-    homepage="https://github.com/yscdzxj/nonebot2_plugin_qq_napcat_process_filtering",
+    homepage="https://github.com/yscdzxj/nonebot2_plugin_napcat_process_filtering",
     supported_adapters={"~onebot.v11"},
 )
 
@@ -19,7 +19,7 @@ driver = get_driver()
 
 @driver.on_startup
 async def _():
-    logger.info("nonebot2_plugin_qq_napcat_process_filtering 插件已启动")
+    logger.info("nonebot2_plugin_napcat_process_filtering 插件已启动")
     asyncio.create_task(auto_check_loop())
 
 # 从环境变量读取配置
