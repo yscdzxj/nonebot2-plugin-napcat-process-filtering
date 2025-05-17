@@ -1,91 +1,115 @@
 <div align="center">
-  <a href="https://v2.nonebot.dev/store">
-    <img src="https://raw.githubusercontent.com/fllesser/nonebot-plugin-template/refs/heads/resource/.docs/NoneBotPlugin.svg" width="310" alt="logo">
+  <a href="https://github.com/yscdzxj/nonebot2_qq_napcat_process_filtering">
+    <img src="https://raw.githubusercontent.com/yscdzxj/nonebot2_qq_napcat_process_filtering/main/.docs/NoneBotPlugin.svg" width="310" alt="logo">
   </a>
 
-## 🤖 NoneBot2 插件：自动同意被过滤好友请求 auto\_accept\_filtered\_requests
+  <h2>✨ NoneBot2 插件：自动同意 NapCat 被过滤的好友请求 ✨</h2>
 
   <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/yourname/auto_accept_filtered_requests.svg" alt="license">
+    <img src="https://img.shields.io/github/license/yscdzxj/nonebot2_qq_napcat_process_filtering.svg" alt="license">
   </a>
   <img src="https://img.shields.io/badge/python-3.8|3.9|3.10|3.11-blue.svg" alt="python">
-  <a href="https://onebot.dev/">
-    <img src="https://img.shields.io/badge/OneBot-v11-black?style=social" alt="onebot">
+  <a href="https://github.com/nonebot/nonebot2">
+    <img src="https://img.shields.io/badge/NoneBot2-v2.0.0-green.svg" alt="NoneBot2">
+  </a>
+  <a href="https://napneko.com/">
+    <img src="https://img.shields.io/badge/NapCat-NTQQ-orange.svg" alt="NapCat">
   </a>
 </div>
 
-> \[!IMPORTANT]
-> **收藏项目**，获取插件更新的第一时间通知！🌟
+> 基于 NapCat 的 `<获取被过滤好友请求 API>` 实现的自动同意被过滤好友请求的 NoneBot2 插件。
 
-## 📖 插件简介
+---
 
-`auto_accept_filtered_requests` 是基于 [NoneBot2](https://github.com/nonebot/nonebot2) 开发的插件，用于自动获取并处理平台过滤掉的好友申请请求。
+## 📖 介绍
 
-插件会定时向指定的 API 请求被平台过滤的好友申请列表，并自动同意这些请求（可选记录 QQ 至文件中）。
+本插件旨在自动处理 NapCat 中被过滤的好友请求，减少手动操作，提高效率。
 
-## 🚀 功能特性
+### ✨ 特性
 
-* ⏱️ 定时检查被过滤的好友申请
-* ✅ 自动同意符合条件的请求
-* 📝 可选记录已通过的 QQ 号
-* 🔧 完全可配置（通过 `.env.prod`）
+* 自动轮询 NapCat 提供的被过滤好友请求接口
+* 自动同意符合条件的好友请求
+* 可选记录已同意的 QQ 号
+* 可配置轮询间隔和请求数量
 
-## 🔧 环境配置
+## 💿 安装
 
-在 `.env.prod` 文件中添加如下配置项：
+### 依赖环境
 
-| 环境变量名            | 默认值                     | 说明               |
-| ---------------- | ----------------------- | ---------------- |
-| `API_BASE`       | `http://127.0.0.1:3000` | 请求 API 的地址       |
-| `INTERVAL`       | `30`                    | 每次检查的时间间隔（单位：秒）  |
-| `COUNT`          | `50`                    | 每次拉取的最大请求数       |
-| `LOG_FILE`       | `approved_requests.txt` | （可选）记录已通过好友的文件路径 |
-| `ENABLE_LOGGING` | `false`                 | 是否启用记录通过请求的 QQ 号 |
+* Python 3.8 及以上版本
+* NoneBot2
+* NapCat（必须开启 HTTP 服务端口127.0.0.1:3000）(参考https://napcat.apifox.cn/289565516e0)
 
-示例 `.env.prod` 文件：
+### 安装插件
 
-```ini
+1. 确保已安装 `httpx` 驱动：
+
+   ```bash
+   nb driver install httpx
+   ```
+2. 克隆本仓库或将插件代码放入 NoneBot2 项目的插件目录。
+
+## ⚙️ 配置
+
+在项目根目录下创建 `.env.prod` 文件，并添加以下配置项：
+
+```env
+# NapCat HTTP 服务地址
 API_BASE=http://127.0.0.1:3000
-INTERVAL=60
-COUNT=100
-LOG_FILE=approved.txt
+
+# 轮询间隔（秒）
+INTERVAL=3600
+
+# 每次获取的请求数量
+COUNT=1
+
+# 是否启用日志记录（true/false）(会自动填充在根目录)
 ENABLE_LOGGING=true
+
+# 日志文件名字
+LOG_FILE=approved_requests.txt
 ```
 
-## 💿 安装方式
+## 🚀 使用
 
-进入你的 NoneBot2 项目根目录，安装插件代码：
+插件将在 NoneBot2 启动时自动运行，并开始轮询 NapCat 的被过滤好友请求接口。
 
-```bash
-# 假设你已放置插件到插件目录 plugins/auto_accept_filtered_requests
-# 或者通过 git clone 添加插件
-```
-
-修改 `pyproject.toml` 中 `[tool.nonebot]` 配置：
-
-```toml
-[tool.nonebot]
-plugins = ["auto_accept_filtered_requests"]
-```
-
-## 🧠 插件机制简介
-
-插件启动后：
-
-1. 加载 `.env.prod` 配置。
-2. 注册 `on_startup` 事件，启动自动检查任务。
-3. 定时调用 API 拉取被过滤的好友申请。
-4. 自动发送同意请求，记录 QQ 到本地文件（可选）。
-
-## 🧪 示例日志输出
+### 示例日志输出
 
 ```
-✅ auto_accept_filtered_requests 插件已启动
-🌟 auto_check_loop 已启动
-发现请求来自: 张三（QQ: 123456789），flag: abc123，自动同意中...
-✅ 已记录 QQ：123456789 到 approved_requests.txt
+
+auto_accept_filtered_requests 插件已启动
+auto_check_loop 已启动
+开始自动检查被过滤的好友请求...
+发现请求来自: 用户昵称（QQ: 123456789），flag: abcdefg，自动同意中...
+已同意被过滤好友请求 flag=abcdefg，QQ=123456789
+已记录 QQ：123456789 到 approved_requests.txt
 ```
 
-## 📜 License
 
-本项目基于 MIT 协议发布。欢迎自由使用与修改。
+
+## 🧩 插件原理
+
+插件通过 NapCat 提供的 HTTP 接口获取被过滤的好友请求列表，并自动发送同意请求。
+
+### 主要接口
+
+* `/get_doubt_friends_add_request`：获取被过滤的好友请求
+* `/set_doubt_friends_add_request`：同意被过滤的好友请求
+
+详细接口文档请参考 [NapCat 接口文档](https://napcat.apifox.cn/)。
+
+## 🛠️ 开发者说明
+
+插件核心逻辑位于 `auto_accept_filtered_requests.py` 文件中，主要包括以下函数：
+
+* `fetch_filtered_requests`：获取被过滤的好友请求
+* `approve_request`：同意指定的好友请求
+* `auto_check_loop`：定时轮询并处理请求
+
+如需自定义处理逻辑，可根据需求修改上述函数。
+
+## 🤝 致谢
+
+* [NapCat](https://napneko.com/)：现代化的基于 NTQQ 的 Bot 协议端实现
+* [NoneBot2](https://github.com/nonebot/nonebot2)：跨平台的 Python 异步机器人框架
