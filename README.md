@@ -54,7 +54,7 @@
 在项目目录下执行以下命令：
 
    ```
-nb plugin install nonebot-plugin-apscheduler：
+  nb plugin install nonebot-plugin-apscheduler：
    ```
 3. 克隆本仓库或将插件代码放入 NoneBot2 项目的插件目录。
 
