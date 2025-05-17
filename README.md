@@ -1,9 +1,9 @@
 <div align="center">
-  <a href="https://github.com/yscdzxj/nonebot2_qq_napcat_process_filtering">
-    <img src="https://raw.githubusercontent.com/yscdzxj/nonebot2_qq_napcat_process_filtering/main/.docs/NoneBotPlugin.svg" width="310" alt="logo">
+  <a href="https://v2.nonebot.dev/store">
+    <img src="https://raw.githubusercontent.com/fllesser/nonebot-plugin-template/refs/heads/resource/.docs/NoneBotPlugin.svg" width="310" alt="logo">
   </a>
 
-  <h2>✨ NoneBot2 插件：自动同意 NapCat 被过滤的好友请求 ✨</h2>
+  <h2>✨ NoneBot2 插件：自动同意 QQ 被过滤的好友请求 ✨</h2>
 
   <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/yscdzxj/nonebot2_qq_napcat_process_filtering.svg" alt="license">
@@ -16,6 +16,11 @@
     <img src="https://img.shields.io/badge/NapCat-NTQQ-orange.svg" alt="NapCat">
   </a>
 </div>
+
+> [!IMPORTANT]
+> **收藏项目**，你将从 GitHub 上无延迟地接收所有发布通知～⭐️
+
+<img width="100%" src="https://starify.komoridevs.icu/api/starify?owner=yscdzxj&repo=nonebot2_qq_napcat_process_filtering" alt="starify" />
 
 > 基于 NapCat 的 `<获取被过滤好友请求 API>` 实现的自动同意被过滤好友请求的 NoneBot2 插件。
 
@@ -38,7 +43,7 @@
 
 * Python 3.8 及以上版本
 * NoneBot2
-* NapCat（必须开启 HTTP 服务端口127.0.0.1:3000）(参考https://napcat.apifox.cn/289565516e0)
+* NapCat（必须开启 HTTP 服务端口127.0.0.1:3000）
 
 ### 安装插件
 
@@ -51,7 +56,7 @@
 
 ## ⚙️ 配置
 
-在项目根目录下创建 `.env.prod` 文件，并添加以下配置项：
+在项目目录下 `.env.prod` 文件添加以下配置：
 
 ```env
 # NapCat HTTP 服务地址
@@ -63,7 +68,7 @@ INTERVAL=3600
 # 每次获取的请求数量
 COUNT=1
 
-# 是否启用日志记录（true/false）(会自动填充在根目录)
+# 是否启用日志记录（true/false）(会自动填充在项目目录)
 ENABLE_LOGGING=true
 
 # 日志文件名字
@@ -94,14 +99,13 @@ auto_check_loop 已启动
 
 ### 主要接口
 
-* `/get_doubt_friends_add_request`：获取被过滤的好友请求
-* `/set_doubt_friends_add_request`：同意被过滤的好友请求
+* `/set_doubt_friends_add_request`：获取被过滤好友请求
 
-详细接口文档请参考 [NapCat 接口文档](https://napcat.apifox.cn/)。
+详细接口文档请参考(https://napcat.apifox.cn/289565516e0)。
 
 ## 🛠️ 开发者说明
 
-插件核心逻辑位于 `auto_accept_filtered_requests.py` 文件中，主要包括以下函数：
+插件核心逻辑位于 `__inti__.py` 文件中，主要包括以下函数：
 
 * `fetch_filtered_requests`：获取被过滤的好友请求
 * `approve_request`：同意指定的好友请求
@@ -111,5 +115,5 @@ auto_check_loop 已启动
 
 ## 🤝 致谢
 
-* [NapCat](https://napneko.com/)：现代化的基于 NTQQ 的 Bot 协议端实现
+* [NapCat]https://napneko.github.io/：现代化的基于 NTQQ 的 Bot 协议端实现
 * [NoneBot2](https://github.com/nonebot/nonebot2)：跨平台的 Python 异步机器人框架
